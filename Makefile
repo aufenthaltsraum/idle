@@ -1,5 +1,5 @@
 TARGET = idle.min
-SOURCES = object.js main.js
+SOURCES = object.js state.js update.js actions.js main.js
 
 all: build/$(TARGET).js
 
