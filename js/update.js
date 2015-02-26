@@ -1,27 +1,12 @@
 AI.tick = function() {
+  var i;
   var now = new Date();
   var s = AI.state;
   var delta = now - s.update;
   s.update = now;
-  $(".person").remove();
-  for (i = 0; i < s.people.who.length; i++) {
-    var occupation, element;
-    switch (s.people.who[i].occupation) {
-      case "exc":
-        occupation = "solving exercises"
-        break;
-      case "tea":
-        occupation = "buying tea"
-        break;
-      default:
-        break;
-    }
-    element = "<li class=\"person\">" + occupation + "</li>";
-    $("#people").append(element);
-  }
   s.exercises += (delta / (s.drinkingTea > 0 ? 1000.0 : 5000.0)) * s.people.occupations.exc;
   $("#exercises").html(Math.floor(s.exercises));
-  s.tea += (delta / 10000.0) * s.people.occupations.tea;
+  s.tea += (delta / 5000.0) * s.people.occupations.tea;
   $("#tea").html(Math.floor(s.tea));
   s.drinkingTea -= delta;
   if (s.drinkingTea > 0) {
