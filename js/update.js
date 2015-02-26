@@ -7,7 +7,7 @@ AI.tick = function() {
   s.update = now;
   $(".person").remove();
   for (i = 0; i < s.people.length; i++) {
-    var occupation;
+    var occupation, element;
     switch (s.people[i]) {
       case "exc":
         occupation = "solving exercises"
@@ -20,7 +20,8 @@ AI.tick = function() {
       default:
         break;
     }
-    $("#people").append("<li class=\"person\"> " + occupation + "</li>");
+    element = "<li class=\"person\">" + occupation + "</li>";
+    $("#people").append(element);
   }
   s.exercises += (delta / (s.drinkingTea > 0 ? 1000.0 : 5000.0)) * productives;
   $("#exercises").html(Math.floor(s.exercises));
