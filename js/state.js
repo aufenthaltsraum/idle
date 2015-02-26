@@ -4,15 +4,19 @@ AI.People = function (w) {
     return {id: nextId++, occupation: o};
   });
   this.nextId = nextId;
-  this.occupations = {
+  this.occupations = { // supposed to be hardcoded
     exc: this.occupiedWith("exc"),
     tea: this.occupiedWith("tea")
   };
 };
 
-/*AI.People.prototype.addPerson (o) {
-  
-}*/
+AI.People.prototype.addPerson = function (o) {
+  var nextId = this.nextId;
+  this.who[this.who.length] = {id: nextId++, occupation: o};
+  this.nextId = nextId;
+  this.occupations[o]++;
+  return this;
+}
 
 AI.People.prototype.occupiedWith = function (o) {
   var n = 0;
@@ -23,6 +27,18 @@ AI.People.prototype.occupiedWith = function (o) {
   }
   return n;
 };
+
+AI.People.prototype.changeOccupation = function (id, o) {
+  for (i = 0; i < this.who.length; i++) {
+    if (this.who[i].id == id) {
+      this.occupations[this.who[i].occupation]--;
+      this.who[i].occupation = o;
+      this.occupations[this.who[i].occupation]++;
+      return i;
+    }
+  }
+  return undefined;
+}
 
 AI.State = function () {
   this.exercises = 0;
