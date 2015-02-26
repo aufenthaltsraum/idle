@@ -1,13 +1,32 @@
-AI.State = function() {
-  this.exercises = 0;
-  this.people = ["exc", "exc"];
-  this.occupations = {};
-  for (i = 0; i < this.people.length; i++) {
-    if (!(this.occupations.hasOwnProperty(this.people[i]))) {
-      this.occupations[this.people[i]] = 0;
+AI.People = function (w) {
+  var nextId = 0;
+  this.who = w.map(function (o) {
+    return {id: nextId++, occupation: o};
+  });
+  this.nextId = nextId;
+  this.occupations = {
+    exc: this.occupiedWith("exc"),
+    tea: this.occupiedWith("tea")
+  };
+};
+
+/*AI.People.prototype.addPerson (o) {
+  
+}*/
+
+AI.People.prototype.occupiedWith = function (o) {
+  var n = 0;
+  for (i = 0; i < this.who.length; i++) {
+    if (this.who[i].occupation == o) {
+      n++;
     }
-    this.occupations[this.people[i]]++;
   }
+  return n;
+};
+
+AI.State = function () {
+  this.exercises = 0;
+  this.people = new AI.People(["exc", "exc"]);
   this.tea = 5;
   this.drinkingTea = 0;
   this.cups = 0;
