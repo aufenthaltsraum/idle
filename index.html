@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <title>An Idle Game</title>
     <script src="lib/angular.min.js"></script>
+    <script src="js/room.js"></script>
     <script src="js/idle.js"></script>
   </head>
   <body>
     <div ng-controller="IdleController as idle">
-      <p>{{idle.exercises|floor}} Exercises Solved</p>
+      <p>{{idle.room.exercises|floor}} Exercises Solved</p>
       <p>People
       
-<ul ng-repeat="person in idle.people.who">
+<ul ng-repeat="person in idle.room.people.who">
   <li>{{person.occupation|occupationText}}
     <form name="occupationSelectForm"
     ng-controller="ChangeOccupationCtrl as selector">
       <select ng-model=selector.occupation class="form-control"
-      ng-options="occupation[1] for occupation in idle.occupationList"
+      ng-options="occupation[1] for occupation in idle.room.occupationList"
       title=OccSelect" ng-change="selector.changeOccupation(person)">
         <option value=""> Choose new Occupation </option>
       </select>
@@ -25,8 +26,8 @@
 </ul>
 
       </p>
-      <p>Tea Available: {{idle.tea|floor}}</p>
-      <p>Dirty Cups: {{idle.cups|floor}}</p>
+      <p>Tea Available: {{idle.room.tea|floor}}</p>
+      <p>Dirty Cups: {{idle.room.cups|floor}}</p>
     </div>
   </body>
 </html>
