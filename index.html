@@ -12,13 +12,13 @@
       <p>{{idle.room.exercises|floor}} Exercises Solved</p>
       <p>People
       
-<ul ng-repeat="person in idle.room.people.who">
-  <li>{{person.occupation|occupationText}}
+<ul ng-repeat="person in idle.room.people">
+  <li>{{person.occupation.description}}
     <form name="occupationSelectForm"
     ng-controller="ChangeOccupationCtrl as selector">
-      <select ng-model=selector.occupation class="form-control"
-      ng-options="occupation[1] for occupation in idle.room.occupationList"
-      title=OccSelect" ng-change="selector.changeOccupation(person)">
+      <select ng-model="selector.occupation" class="form-control"
+      ng-options="occupation.description for occupation in idle.room.occupations"
+      title="OccSelect" ng-change="selector.changeOccupation(person)">
         <option value=""> Choose new Occupation </option>
       </select>
     </form>
@@ -27,11 +27,11 @@
 
       </p>
       <p>
-        Tea Available: {{idle.room.tea|floor}}
-        <button ng-click="idle.drink()" ng-show="(!(idle.room.drinking>0))&&idle.room.tea>0">
+        Tea Available: {{idle.room.tea.amount|floor}}
+        <button ng-click="idle.drink()" ng-show="!(idle.room.tea.active) && idle.room.tea.amount > 0">
           drink some tea
         </button>
-        <a ng-hide="(!(idle.room.drinking>0))&&idle.room.tea>0"> {{idle.room.drinking|ceil}} </a>
+        <a ng-show="idle.room.tea.active"> {{idle.room.tea.time|ceil}} </a>
       </p>
       <p>Dirty Cups: {{idle.room.cups|floor}}</p>
     </div>
