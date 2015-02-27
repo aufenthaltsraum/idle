@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app="idle">
 <head>
 <meta charset="UTF-8">
 <title>An Idle Game</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="build/idle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="js/idle.js"></script>
 </head>
 <body>
-<p><a id="exercises">0</a> Exercises Solved</p>
-<p>People:<ul id="people"></ul></p>
-<p id="tea-container">Tea Available: <a id="tea">0</a> </p>
-<p>Dirty Cups: <a id="cups">0</a></p>
+<div ng-controller="IdleController as idle">
+<p>{{idle.exercises}} Exercises Solved</p>
+<p>People:
+<ul ng-repeat="person in idle.people.who">
+<li>{{person.occupation}}</li>
+</ul>
+</p>
+<p>Tea Available: {{idle.tea}}</p>
+<p>Dirty Cups: {{idle.cups}}</p>
+</div>
 </body>
 </html>

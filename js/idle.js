@@ -6,28 +6,9 @@ var People = function (w) {
   this.nextId = nextId;
 };
 
-People.prototype.addPerson = function (o) {
-  var nextId = this.nextId;
-  this.who[this.who.length] = {id: nextId++, occupation: o};
-  this.nextId = nextId;
-  return this;
-};
-
-
-People.prototype.changeOccupation = function (id, o) {
-  var i;
-  for (i = 0; i < this.who.length; i++) {
-    if (this.who[i].id == id) {
-      this.who[i].occupation = o;
-      return id;
-    }
-  }
-  return undefined;
-}
-
-function () {
-  var app = angular.module('IdleApp', [])
-  
+(function () {
+  var app = angular.module('idle', []);
+  console.log("hello");
   app.controller ('IdleController', function () {
     this.exercises = 0;
     this.cups = 0;
@@ -35,5 +16,5 @@ function () {
     this.update = new Date();
     this.people = new People(["exc", "exc"]);
   });
-};
+})();
   
