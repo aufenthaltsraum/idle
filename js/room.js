@@ -29,6 +29,7 @@ var Person = function (o, nextId) {
 };
 
 var Room = function () {
+    this.drinking = 0;
     this.exercises = 0;
     this.cups = 0;
     this.tea = 5;

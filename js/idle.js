@@ -35,10 +35,11 @@
       var update = new Date ();
       var delta = update - ref.update;
       ref.update = update;
+      ref.drinking -= delta/1000;
       var i;
       for (i = 0; i < ref.people.who.length; i++) {
         if (ref.people.who[i].occupation === "exc") {
-          ref.exercises += ref.people.who[i].tick(delta);
+          ref.exercises += ref.people.who[i].tick(delta) *((ref.drinking>0)?5:1);
         }
         else if (ref.people.who[i].occupation === "tea") {
           ref.tea += ref.people.who[i].tick(delta);
@@ -57,6 +58,13 @@
       };
       return undefined;
     };
+    this.drink = function (){
+      if ((!(ref.drinking>0))&&ref.tea>0) {
+        ref.tea--;
+        ref.cups++;
+        ref.drinking = 60;
+      }
+    }
   });
   
   app.controller("ChangeOccupationCtrl", function () {

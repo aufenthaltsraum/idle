@@ -26,7 +26,13 @@
 </ul>
 
       </p>
-      <p>Tea Available: {{idle.room.tea|floor}}</p>
+      <p>
+        Tea Available: {{idle.room.tea|floor}}
+        <button ng-click="idle.drink()" ng-show="(!(idle.room.drinking>0))&&idle.room.tea>0">
+          drink some tea
+        </button>
+        <a ng-hide="(!(idle.room.drinking>0))&&idle.room.tea>0"> {{idle.room.drinking|ceil}} </a>
+      </p>
       <p>Dirty Cups: {{idle.room.cups|floor}}</p>
     </div>
   </body>
