@@ -28,7 +28,7 @@ People.prototype.changeOccupation = function (id, o) {
 function () {
   var app = angular.module('IdleApp', [])
   
-  app.controller ('IdleController, function () {
+  app.controller ('IdleController', function () {
     this.exercises = 0;
     this.cups = 0;
     this.tea = 5;
