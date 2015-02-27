@@ -1,13 +1,12 @@
 TARGET = idle.min
-SOURCES = object.js state.js update.js actions.js main.js
 
-all: build/$(TARGET).js
+all: setup
 
-build/$(TARGET).js: js/*
-	mkdir -p build
-	cd js && java -jar ../tools/compiler.jar $(SOURCES) > ../build/$(TARGET).js
+setup:
+	mkdir -p lib
+	cd lib && wget -c https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js
 
 clean:
-	rm -f js/$(TARGET).js
+	rm -rf lib
 
 .PHONY: clean
