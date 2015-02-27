@@ -1,11 +1,12 @@
 TARGET = idle.min
 
-all: build/$(TARGET).js
+all: setup
 
-build/$(TARGET).js: js/*
-	echo "nothing to build for now"
+setup:
+	mkdir -p lib
+	cd lib && wget -c https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js
 
 clean:
-	echo "nothing to clean for now"
+	rm -rf lib
 
 .PHONY: clean
