@@ -30,6 +30,31 @@ var Person = function (o, nextId) {
 
 (function () {
   var app = angular.module('idle', []);
+    // filters
+  app.filter('floor', function (){ 
+    return function (input){
+      return Math.floor(input); 
+    }
+  });
+  app.filter('ceil', function (){ 
+    return function (input){
+      return Math.ceil(input); 
+    }
+  });
+  app.filter('occupationText', function (){ 
+    return function (input){
+      if (input == "exc") {
+        return "solving exercises";
+      }
+      else if (input == "tea") {
+        return "buying tea";
+      }
+      else {
+        return undefined;
+      }
+    }
+  });
+    // controllers
   app.controller ('IdleController',  function ($interval) {
     this.exercises = 0;
     this.cups = 0;
@@ -39,6 +64,7 @@ var Person = function (o, nextId) {
     this.occupationList = [["exc","solving exercises"],["tea","buying tea"]];
     //
     var ref = this;
+    
     this.tick = function () {
       var update = new Date ();
       var delta = update - ref.update;
@@ -67,30 +93,7 @@ var Person = function (o, nextId) {
     };
   });
   
-  app.filter('floor', function (){ 
-    return function (input){
-      return Math.floor(input); 
-    }
-  });
-  app.filter('ceil', function (){ 
-    return function (input){
-      return Math.ceil(input); 
-    }
-  });
-  app.filter('occupationText', function (){ 
-    return function (input){
-      if (input == "exc") {
-        return "solving exercises";
-      }
-      else if (input == "tea") {
-        return "buying tea";
-      }
-      else {
-        return undefined;
-      }
-    }
-  });
-  app.controller("OccupationSelectController", function () {
+  app.controller("ChangeOccupationCtrl", function () {
     this.occupation = "Choose a new Occupation";
     this.occupations = ["exc","tea"];
     var ref = this;
@@ -99,5 +102,6 @@ var Person = function (o, nextId) {
       ref.occupation = "Choose a new Occupation";
     };
   });
+  
 })();
   

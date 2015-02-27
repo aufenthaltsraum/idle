@@ -1,29 +1,32 @@
 <!DOCTYPE HTML>
 <html ng-app="idle">
-<head>
-<meta charset="UTF-8">
-<title>An Idle Game</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-<script src="js/idle.js"></script>
-</head>
-<body>
-<div ng-controller="IdleController as idle">
-<p>{{idle.exercises|floor}} Exercises Solved</p>
-<p>People:
+  <head>
+    <meta charset="UTF-8">
+    <title>An Idle Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="js/idle.js"></script>
+  </head>
+  <body>
+    <div ng-controller="IdleController as idle">
+      <p>{{idle.exercises|floor}} Exercises Solved</p>
+      <p>People
+      
 <ul ng-repeat="person in idle.people.who">
-<li>{{person.occupation|occupationText}}
-<form name="occutpationSelectForm" ng-controller=
-"OccupationSelectController as selector">
-<select ng-model=selector.occupation class="form-control"
-ng-options="occupation[1] for occupation in idle.occupationList"
-title=OccSelect" ng-change="selector.changeOccupation(person)"> <option value=""> Choose new Occupation </option>
-</select>
-</form>
-</li>
+  <li>{{person.occupation|occupationText}}
+    <form name="occupationSelectForm"
+    ng-controller="ChangeOccupationCtrl as selector">
+      <select ng-model=selector.occupation class="form-control"
+      ng-options="occupation[1] for occupation in idle.occupationList"
+      title=OccSelect" ng-change="selector.changeOccupation(person)">
+        <option value=""> Choose new Occupation </option>
+      </select>
+    </form>
+  </li>
 </ul>
-</p>
-<p>Tea Available: {{idle.tea|floor}}</p>
-<p>Dirty Cups: {{idle.cups|floor}}</p>
-</div>
-</body>
+
+      </p>
+      <p>Tea Available: {{idle.tea|floor}}</p>
+      <p>Dirty Cups: {{idle.cups|floor}}</p>
+    </div>
+  </body>
 </html>
