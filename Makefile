@@ -1,13 +1,11 @@
 TARGET = idle.min
-SOURCES = object.js state.js update.js actions.js main.js
 
 all: build/$(TARGET).js
 
 build/$(TARGET).js: js/*
-	mkdir -p build
-	cd js && java -jar ../tools/compiler.jar $(SOURCES) > ../build/$(TARGET).js
+	echo "nothing to build for now"
 
 clean:
-	rm -f js/$(TARGET).js
+	echo "nothing to clean for now"
 
 .PHONY: clean
