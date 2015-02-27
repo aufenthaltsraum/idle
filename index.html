@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>An Idle Game</title>
     <script src="lib/angular.min.js"></script>
+    <script src="js/things.js"></script>
     <script src="js/room.js"></script>
     <script src="js/idle.js"></script>
   </head>
   <body>
     <div ng-controller="IdleController as idle">
-      <p>{{idle.room.exercises|floor}} Exercises Solved</p>
+      <p>{{idle.room.exercises.amount|floor}} Exercises Solved</p>
       <p>People
       
 <ul ng-repeat="person in idle.room.people">
@@ -28,12 +29,12 @@
       </p>
       <p>
         Tea Available: {{idle.room.tea.amount|floor}}
-        <button ng-click="idle.drink()" ng-show="!(idle.room.tea.active) && idle.room.tea.amount > 0">
+        <button ng-click="idle.drink()" ng-show="!(idle.room.tea.active) && idle.room.tea.amount >= 1">
           drink some tea
         </button>
         <a ng-show="idle.room.tea.active"> {{idle.room.tea.time|ceil}} </a>
       </p>
-      <p>Dirty Cups: {{idle.room.cups|floor}}</p>
+      <p>Dirty Cups: {{idle.room.cups.amount|floor}}</p>
     </div>
   </body>
 </html>

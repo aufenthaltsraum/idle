@@ -1,44 +1,23 @@
 var Room = function () {
     this.update = new Date();
-    this.exercises = 0;
-    this.tea = {
-      amount : 5,
-      active : false,
-      time : 0,
-      tick : {
-        id : 'tea',
-        fct : function (ref, delta) {
-          var time = ref.tea.time;
-          if (time > 0) {
-            ref.tea.time = time - delta > 0 ? time - delta : 0;
-            ref.tea.time -= time - ref.tea.time;
-          }
-          else {
-            ref.tea.active = false;
-            ref.tea.time = 0;
-            ref.removeTick('tea');
-          }
-        }
+
+    this.exercises = new Thing();
+
+    this.tea = new Activatable('tea', function (ref, delta) {
+      var time = ref.tea.time;
+      if (time > 0) {
+        ref.tea.time = time - delta > 0 ? time - delta : 0;
+        ref.tea.time -= time - ref.tea.time;
       }
-    }
-    this.cups = 0;
+      else {
+        ref.tea.active = false;
+        ref.tea.time = 0;
+        ref.removeTick('tea');
+      }
+    });
+    this.cups = new Thing();
     this.nextId = 0;
-    this.occupations = [
-      {
-        tag : 'exc',
-        description : "solving exercises",
-        tickFunction : function (ref, delta) {
-          ref.exercises += delta / 1000;
-        }
-      },
-      {
-        tag : 'tea',
-        description : "buying tea",
-        tickFunction : function (ref, delta) {
-          ref.tea.amount += delta / 100000;
-        }
-      }
-    ]
+    this.occupations = parameters.occupations;
     this.people = [];
     this.ticks = [];
     this.addPerson('exc').addPerson('exc');
