@@ -8,14 +8,14 @@
 </head>
 <body>
 <div ng-controller="IdleController as idle">
-<p>{{idle.exercises}} Exercises Solved</p>
+<p>{{idle.exercises|floor}} Exercises Solved</p>
 <p>People:
 <ul ng-repeat="person in idle.people.who">
 <li>{{person.occupation}}</li>
 </ul>
 </p>
-<p>Tea Available: {{idle.tea}}</p>
-<p>Dirty Cups: {{idle.cups}}</p>
+<p>Tea Available: {{idle.tea|floor}}</p>
+<p>Dirty Cups: {{idle.cups|floor}}</p>
 </div>
 </body>
 </html>
