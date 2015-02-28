@@ -27,14 +27,9 @@ var Room = function () {
 
 Room.prototype.addPerson = function (tag) {
   var o = parameters.findOccupation(tag);
-  this.people.push({
-    id : this.nextId,
-    occupation : o
-  });
-  this.ticks.push({
-    id : 'person' + this.nextId,
-    fct : o.tickFunction
-  });
+  var p = new Person(this.nextId, o);
+  this.people.push(p);
+  this.ticks.push(p.tick);
   this.nextId++;
   return this;
 }

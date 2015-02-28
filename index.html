@@ -1,41 +1,70 @@
 <!DOCTYPE HTML>
 <html ng-app="idle">
   <head>
+
     <meta charset="UTF-8">
     <title>An Idle Game</title>
+
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/default.css">
+
+    <script src="lib/jquery.min.js"></script>
     <script src="lib/angular.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+
     <script src="js/parameters.js"></script>
     <script src="js/things.js"></script>
     <script src="js/room.js"></script>
     <script src="js/idle.js"></script>
+
   </head>
   <body>
-    <div ng-controller="IdleController as idle">
-      <p>{{idle.room.exercises.amount|floor}} Exercises Solved</p>
-      <p>People
-      
-<ul ng-repeat="person in idle.room.people">
-  <li>{{person.occupation.description}}
-    <form name="occupationSelectForm"
-    ng-controller="ChangeOccupationCtrl as selector">
-      <select ng-model="selector.occupation" class="form-control"
-      ng-options="occupation.description for occupation in selector.occupations"
-      title="OccSelect" ng-change="selector.changeOccupation(person)">
-        <option value=""> choose new occupation </option>
-      </select>
-    </form>
-  </li>
-</ul>
+    <div id="container" ng-controller="IdleController as idle">
 
+      <h2>{{idle.room.exercises.amount | floor}} Exercises Solved</h2>
+
+      <p class="lead">
+        People
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Current Occupation</th>
+                <th>Other Occupations</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="person in idle.room.people">
+                <td>{{person.occupation.description}}</td>
+                <td>
+                  <button type="button" class="btn btn-xs btn-default"
+                          ng-repeat="occupation in idle.occupations"
+                          ng-show="occupation.tag !== person.occupation.tag"
+                          ng-click="person.setOccupation(occupation)">
+                     {{occupation.tag}}
+                   </button>
+                 </td>
+                 <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+        <ul>
+        </ul>
       </p>
-      <p>
+
+      <p class="lead">
         Tea Available: {{idle.room.tea.amount|floor}}
-        <button ng-click="idle.drink()" ng-show="!(idle.room.tea.active) && idle.room.tea.amount >= 1">
+        <button type="button" class="btn btn-xs btn-default"
+                ng-click="idle.drink()"
+                ng-show="!(idle.room.tea.active) && idle.room.tea.amount >= 1">
           drink some tea
         </button>
-        <a ng-show="idle.room.tea.active"> {{idle.room.tea.time|ceil}} </a>
+        <span ng-show="idle.room.tea.active">{{idle.room.tea.time | ceil}}</span>
       </p>
-      <p>Dirty Cups: {{idle.room.cups.amount|floor}}</p>
+
+      <p class="lead">Dirty Cups: {{idle.room.cups.amount | floor}}</p>
+
     </div>
   </body>
 </html>

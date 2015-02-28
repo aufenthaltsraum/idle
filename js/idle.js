@@ -15,6 +15,7 @@
     // controllers
   app.controller ('IdleController',  function ($interval) {
     this.room = room;
+    this.occupations = parameters.occupations;
 
     this.tick = function () {
       var i = 0;
@@ -38,16 +39,4 @@
       }
     }
   });
-
-  app.controller("ChangeOccupationCtrl", function () {
-    this.occupation = "Choose a new Occupation";
-    this.occupations = parameters.occupations;
-    var ref = this;
-    this.changeOccupation = function (person, tag) {
-      person.occupation = ref.occupation;
-      room.findTick("person" + person.id).fct = ref.occupation.tickFunction;
-      ref.occupation = "Choose a new Occupation";
-    };
-  });
-
 })();

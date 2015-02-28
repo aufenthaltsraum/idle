@@ -3,14 +3,14 @@ var parameters = {
     {
       tag : 'exc',
       description : "solving exercises",
-      tickFunction : function (ref, delta) {
+      tickFunction : function (ref, delta, person) {
         ref.exercises.increment(delta / 1000);
       }
     },
     {
       tag : 'tea',
       description : "buying tea",
-      tickFunction : function (ref, delta) {
+      tickFunction : function (ref, delta, person) {
         ref.tea.increment(delta / 1000);
       }
     }
