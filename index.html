@@ -1,39 +1,84 @@
 <!DOCTYPE HTML>
 <html ng-app="idle">
   <head>
+
     <meta charset="UTF-8">
     <title>An Idle Game</title>
+
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/default.css">
+
+    <script src="lib/jquery.min.js"></script>
     <script src="lib/angular.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+
+    <script src="js/parameters.js"></script>
+    <script src="js/things.js"></script>
     <script src="js/room.js"></script>
     <script src="js/idle.js"></script>
+
   </head>
   <body>
-    <div ng-controller="IdleController as idle">
-      <p>{{idle.room.exercises|floor}} Exercises Solved</p>
-      <p>People
-      
-<ul ng-repeat="person in idle.room.people.who">
-  <li>{{person.occupation|occupationText}}
-    <form name="occupationSelectForm"
-    ng-controller="ChangeOccupationCtrl as selector">
-      <select ng-model=selector.occupation class="form-control"
-      ng-options="occupation[1] for occupation in idle.room.occupationList"
-      title=OccSelect" ng-change="selector.changeOccupation(person)">
-        <option value=""> Choose new Occupation </option>
-      </select>
-    </form>
-  </li>
-</ul>
+    <div id="container" ng-controller="IdleController as idle">
 
-      </p>
-      <p>
-        Tea Available: {{idle.room.tea|floor}}
-        <button ng-click="idle.drink()" ng-show="(!(idle.room.drinking>0))&&idle.room.tea>0">
-          drink some tea
-        </button>
-        <a ng-hide="(!(idle.room.drinking>0))&&idle.room.tea>0"> {{idle.room.drinking|ceil}} </a>
-      </p>
-      <p>Dirty Cups: {{idle.room.cups|floor}}</p>
+      <h2>{{idle.room.exercises.amount | floor}} Exercises Solved</h2>
+
+      <hr/>
+
+      <h3>People</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Current Status</th>
+            <th>Possible Occupations</th>
+            <th>Possible Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="person in idle.room.people">
+            <td>
+              {{person.occupation.description}}
+              <br/><br/>
+              <div class="progress" ng-repeat="status in person.statuses" style="width: 50%;">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="{{100 * status.remaining / status.duration | floor}}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: {{100 * status.remaining / status.duration | floor}}%;">
+                  {{status.description}}
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-xs btn-default"
+                      ng-repeat="occupation in idle.parameters.occupations"
+                      ng-show="occupation.tag !== person.occupation.tag"
+                      ng-click="person.setOccupation(occupation)">
+                {{occupation.tag}}
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-xs btn-default"
+                      ng-repeat="action in idle.parameters.actions"
+                      ng-show="action.available(idle.room, person)"
+                      ng-click="person.doAction(idle.room, action)">
+                {{action.description}}
+              </button>
+            </td>
+          </tr>
+          <tr><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <hr/>
+
+      <p class="lead">  Tea Available: {{idle.room.tea.amount|floor}}</p>
+
+      <p class="lead">Dirty Cups: {{idle.room.cups.amount | floor}}</p>
+
+      <hr/>
+
     </div>
   </body>
 </html>
