@@ -18,22 +18,3 @@ var Activatable = function (tickId, tickFunction) {
   return a;
 }
 
-var parameters = {
-  occupations : [
-    {
-      tag : 'exc',
-      description : "solving exercises",
-      tickFunction : function (ref, delta) {
-        ref.exercises.increment(delta / 1000);
-      }
-    },
-    {
-      tag : 'tea',
-      description : "buying tea",
-      tickFunction : function (ref, delta) {
-        ref.tea.increment(delta / 1000);
-      }
-    }
-  ]
-}
-

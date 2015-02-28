@@ -33,6 +33,7 @@
         room.tea.active = true;
         room.tea.time = 60000;
         room.cups.increment(1);
+        room.exercises.factor *= 2;
         room.ticks.push(room.tea.tick);
       }
     }
@@ -40,7 +41,7 @@
 
   app.controller("ChangeOccupationCtrl", function () {
     this.occupation = "Choose a new Occupation";
-    this.occupations = room.occupations;
+    this.occupations = parameters.occupations;
     var ref = this;
     this.changeOccupation = function (person, tag) {
       person.occupation = ref.occupation;

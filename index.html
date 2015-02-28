@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>An Idle Game</title>
     <script src="lib/angular.min.js"></script>
+    <script src="js/parameters.js"></script>
     <script src="js/things.js"></script>
     <script src="js/room.js"></script>
     <script src="js/idle.js"></script>
@@ -18,7 +19,7 @@
     <form name="occupationSelectForm"
     ng-controller="ChangeOccupationCtrl as selector">
       <select ng-model="selector.occupation" class="form-control"
-      ng-options="occupation.description for occupation in idle.room.occupations"
+      ng-options="occupation.description for occupation in selector.occupations"
       title="OccSelect" ng-change="selector.changeOccupation(person)">
         <option value=""> Choose new Occupation </option>
       </select>
