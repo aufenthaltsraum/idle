@@ -4,20 +4,7 @@ var Room = function () {
 
   this.exercises = new Thing();
   this.cups = new Thing();
-
-  this.tea = new Activatable('tea', function (ref, delta) {
-    var time = ref.tea.time;
-    if (time > 0) {
-      ref.tea.time = time - delta > 0 ? time - delta : 0;
-      ref.tea.time -= time - ref.tea.time;
-    }
-    else {
-      ref.tea.active = false;
-      ref.tea.time = 0;
-      ref.exercises.factor /= 2;
-      ref.removeTick('tea');
-    }
-  });
+  this.tea = new Thing();
 
   this.people = [];
   this.ticks = [];
@@ -25,14 +12,19 @@ var Room = function () {
   this.addPerson('exc').addPerson('exc');
 };
 
+Room.prototype.getNextId = function () {
+  var id = this.nextId;
+  this.nextId++;
+  return id;
+};
+
 Room.prototype.addPerson = function (tag) {
   var o = parameters.findOccupation(tag);
-  var p = new Person(this.nextId, o);
+  var p = new Person(this.getNextId(), o);
   this.people.push(p);
   this.ticks.push(p.tick);
-  this.nextId++;
   return this;
-}
+};
 
 Room.prototype.findTick = function (id) {
   var i;
@@ -42,7 +34,7 @@ Room.prototype.findTick = function (id) {
     }
   }
   return null;
-}
+};
 
 Room.prototype.removeTick = function (id) {
   var i;
@@ -54,6 +46,6 @@ Room.prototype.removeTick = function (id) {
     }
   }
   return this;
-}
+};
 
 var room;
