@@ -1,10 +1,18 @@
+"use strict";
+
 var Thing = function () {
   this.amount = 0;
   this.factor = 1.0;
 };
 
 Thing.prototype.increment = function (diff) {
-  this.amount += this.factor * diff;
+  var temp = this.amount + this.factor * diff;
+  if (temp > 0) {
+    this.amount = temp;
+  }
+  else {
+    this.amount = 0;
+  }
 };
 
 var Person = function (id, occupation) {
@@ -18,7 +26,7 @@ var Person = function (id, occupation) {
   this.statuses = [];
   this.factors = {};
   for (i = 0; i < parameters.occupations.length; i++) {
-    this.factors[parameters.occupations[i].tag] = 1;
+    this.factors[parameters.occupations[i].tag] = 1.0;
   }
 };
 

@@ -1,6 +1,9 @@
 (function () {
+  "use strict";
+
   var app = angular.module('idle', []);
   room = new Room();
+
     // filters
   app.filter('floor', function (){
     return function (input){
@@ -12,6 +15,7 @@
       return Math.ceil(input);
     }
   });
+
     // controllers
   app.controller ('IdleController',  function ($interval) {
     this.parameters = parameters;
