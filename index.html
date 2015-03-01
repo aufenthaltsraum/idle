@@ -40,7 +40,7 @@
               {{person.occupation.description}}
               <br/><br/>
               <div class="progress" ng-repeat="status in person.statuses" style="width: 50%;">
-                <div class="progress-bar"
+                <div class="progress-bar progress-bar-info"
                      role="progressbar"
                      aria-valuenow="{{100 * status.remaining / status.duration | floor}}"
                      aria-valuemin="0"
@@ -51,20 +51,22 @@
               </div>
             </td>
             <td>
-              <button type="button" class="btn btn-xs btn-default"
-                      ng-repeat="occupation in idle.parameters.occupations"
-                      ng-show="occupation.tag !== person.occupation.tag"
-                      ng-click="person.setOccupation(occupation)">
-                {{occupation.tag}}
-              </button>
+              <span ng-repeat="occupation in idle.parameters.occupations">
+                <button type="button" class="btn btn-sm btn-primary"
+                        ng-show="occupation.tag !== person.occupation.tag"
+                        ng-click="person.setOccupation(occupation)">
+                  {{occupation.tag}}
+                </button>
+              </span>
             </td>
             <td>
-              <button type="button" class="btn btn-xs btn-default"
-                      ng-repeat="action in idle.parameters.actions"
-                      ng-show="action.available(idle.room, person)"
-                      ng-click="person.doAction(idle.room, action)">
-                {{action.description}}
-              </button>
+              <span ng-repeat="action in idle.parameters.actions">
+                <button type="button" class="btn btn-sm btn-default"
+                        ng-show="action.available(idle.room, person)"
+                        ng-click="person.doAction(idle.room, action)">
+                  {{action.description}}
+                </button>
+              </span>
             </td>
           </tr>
           <tr><td></td><td></td><td></td></tr>
@@ -73,7 +75,7 @@
 
       <hr/>
 
-      <p class="lead">  Tea Available: {{idle.room.tea.amount|floor}}</p>
+      <p class="lead">Tea Available: {{idle.room.tea.amount|floor}}</p>
 
       <p class="lead">Dirty Cups: {{idle.room.cups.amount | floor}}</p>
 
