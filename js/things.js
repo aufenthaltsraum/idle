@@ -6,7 +6,13 @@ var Thing = function () {
 };
 
 Thing.prototype.increment = function (diff) {
-  this.amount += this.factor * diff;
+  var temp = this.amount + this.factor * diff;
+  if (temp > 0) {
+    this.amount = temp;
+  }
+  else {
+    this.amount = 0;
+  }
 };
 
 var Person = function (id, occupation) {

@@ -79,6 +79,16 @@
 
       <hr/>
 
+      <div class="{{'alert alert-' + alert.type}}" role="alert"
+           ng-repeat="alert in idle.room.alerts">
+        <button type="button" class="close"
+                aria-label="Close"
+                ng-click="idle.room.removeAlert(alert.id)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{alert.description}}
+      </div>
+
     </div>
   </body>
 </html>

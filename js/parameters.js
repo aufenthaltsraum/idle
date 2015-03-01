@@ -15,6 +15,13 @@ var parameters = {
       tickFunction : function (ref, delta, id) {
         ref.tea.increment(id.factors.tea * delta / 1000);
       }
+    },
+    {
+      tag : 'clean',
+      description : "cleaning up",
+      tickFunction : function (ref, delta, id) {
+        ref.cups.increment(id.factors.tea * -delta / 1000);
+      }
     }
   ],
   actions : [
