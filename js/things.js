@@ -1,3 +1,5 @@
+"use strict";
+
 var Thing = function () {
   this.amount = 0;
   this.factor = 1.0;
@@ -18,7 +20,7 @@ var Person = function (id, occupation) {
   this.statuses = [];
   this.factors = {};
   for (i = 0; i < parameters.occupations.length; i++) {
-    this.factors[parameters.occupations[i].tag] = 1;
+    this.factors[parameters.occupations[i].tag] = 1.0;
   }
 };
 

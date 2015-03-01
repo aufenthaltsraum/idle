@@ -1,3 +1,5 @@
+"use strict";
+
 var Room = function () {
   this.update = new Date();
   this.nextId = 0;
